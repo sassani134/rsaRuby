@@ -1,0 +1,14 @@
+https://medium.com/@tafby88/the-basics-of-a-ruby-gem-f2d25f788465
+https://github.com/ruby/prime
+https://lipanski.com/posts/dockerfile-ruby-best-practices
+https://youtu.be/xDhFgeZHXAI
+https://youtu.be/xDhFgeZHXAI?t=408
+https://apidock.com/ruby/Integer/gcd
+https://youtu.be/Y2bsLRdVBP8
+https://youtu.be/gBHNuFq5PpI
+https://www.rubyguides.com/2019/05/ruby-ascii-unicode/
+https://www.hds.utc.fr/~wschon/sr06/crypto/RSA4_2.htm
+https://www.dcode.fr/chiffre-rsa
+https://fr.wiktionary.org/wiki/%E2%89%A1
+https://fr.wikipedia.org/wiki/Algorithme_d%27Euclide_%C3%A9tendu
+https://stackoverflow.com/questions/16310871/how-to-find-d-given-p-q-and-e-in-rsa
