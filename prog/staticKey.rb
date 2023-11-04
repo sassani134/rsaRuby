@@ -1,48 +1,6 @@
-require 'prime'
-
-################# Génération des clé#################
-
-#1000000000
-def createPrimeNumber()
-  x = rand(100)
-    while x.prime?
-      x = rand(100)
-    end
-  return x
-end
-
-=begin
-pp = 11
-q = 7
-e = 17
-n = pp*q #77
-phi = 60
-
-ed modulo phi = 1
-e modulo phi = 1/d
-1/d modulo phi = e
-1/e modulo phi = d
-17 d modulo 60 = 1
-#totient tant de fois
-// 60 =17 ??
-#how many time 17 in 60
-60 =3*17  #*3.5 ignorer le reste
-60 = 3*17 + 9
-17 = 9
-17 = 1*9 #1.8
-17 = 1*9 + 8
-
-#A
-1 =9 - 1*8
-#B
-1 = 9-1
-#C
-
-# d = 53
-
-Remember that ed mod φ(n) = 1 and cgd(e, φ(n)) = 1.
-=end
-
+require 'byebug'
+require 'pry'
+require 'openssl'
 
 def extended_gcd(a, b)
 
@@ -58,4 +16,76 @@ def extended_gcd(a, b)
   return t, s - q * t
 end
 
-p extended_gcd(17, 60)
+################# Génération des clé#################
+# ≡
+
+# pp = OpenSSL::BN.generate_prime(10).to_i
+pp = 5
+
+# q = OpenSSL::BN.generate_prime(10).to_i
+q = 17
+
+# phi = pp * q
+phi = 64
+
+e = 5
+# e = OpenSSL::BN.generate_prime(10).to_i
+# unless e.gcd(phi) == 1
+#   e = OpenSSL::BN.generate_prime(10).to_i
+#   e = 5
+#   p phi
+#   p e
+# end
+
+=begin
+Remember that ed mod φ(n) = 1 and cgd(e, φ(n)) = 1.
+cgd(e, φ(n)) = es + φ(n)t = 1 ⇔ 17s + 60t = 1.
+  e.gcd(phi) = 1
+  5.gcd(64) = 1
+  5*13 + 64 * (-1) = 1
+  donc
+  5 * 13 ≡ 1 mod(64)
+  e * d ≡ 1 mod(phi)
+
+  l'inverse e modulo phi est d = 13
+=end
+
+
+# extended_gcd(e, phi)
+# p extended_gcd(17, 60) # -7, 2
+p extended_gcd(3, 20) # 13 -1
+# 5*13 + 64 * (-1) = 1
+# e*d + phi * extended_gcd(e, phi)[1] = 1
+
+=begin
+  https://youtu.be/xDhFgeZHXAI?t=510
+  p = 3 et q = 11
+  n = p * q = 33
+  phi = 20
+  e = 3
+  extended_gcd(3,20) [7 - 1]
+
+=end
+
+
+
+=begin
+https://youtu.be/Xlal_d4zyfo?t=232
+https://youtu.be/Xlal_d4zyfo?t=320
+p = 5 et q = 17
+n = 85
+phi 64
+e = 5
+d =13
+ extended_gcd(e, phi) = [13, -1]
+cgd(e, φ(n)) = es + φ(n)t = 1 ⇔ 17s + 60t = 1.
+  e.gcd(phi) = 1
+  5.gcd(64) = 1
+  5*13 + 64 * (-1) = 1
+  donc
+  5 * 13 ≡ 1 mod(64)
+  e * d ≡ 1 mod(phi)
+
+  l'inverse e modulo phi est d = 13
+
+=end

@@ -1,28 +1,22 @@
-messageClaire ="a"
-messageAscii = Array.new
-puts messageClaire
+messageClaire ="abcd"
+messageAscii = messageClaire.bytes
+asciiUni = Array.new
+messageChiffre = nil
 
-publicKey = [33, 3]
-privateKey = [33, 7]
+ayo = 97
 
-# Chiffrement
+# p format('%03d', 77)
+# p messageAscii[0].class
+
+# publicKey = [33, 3]
+# privateKey = [33, 7]
 
 
+# p messageAscii
 
-for i in 0..messageClaire.length-1
-  messageAscii << messageClaire[i].ord
-end
 
-p messageAscii
+# messageAscii.each do |n|
+#  asciiUni << format('%03d', n)
+# end
 
-p messageClaire
-p messageClaire.bytes
-
-messageCache = 97.pow(33) / 3
-
-p "ayo"
-p messageCache
-
-theMessage = messageCache.pow(7) % 3
-
-p "message :" + theMessage.to_s
+# p asciiUni

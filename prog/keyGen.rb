@@ -1,7 +1,51 @@
 require 'prime'
 require 'byebug'
-require 'modular_inverse'
 require 'pry'
+require 'openssl'
+
+def gcd_etendu(a, b)
+  # cgd(e, φ(n)) = es + φ(n)t = 1
+  # d = s + φ(n)
+  # trivial case first: gcd(a, 0) == 1*a + 0*0
+  return 1, 0 if b == 0
+
+  # recurse: a = q*b + r
+  q, r = a.divmod b
+  s, t = gcd_etendu(b, r)
+
+  # compute and return coefficients:
+  # gcd(a, b) == gcd(b, r) == s*b + t*r == s*b + t*(a - q*b)
+  return t, s - q * t
+end
+
+pp = OpenSSL::BN.generate_prime(10).to_i
+# pp = OpenSSL::BN.generate_prime(10,true).to_i
+q = OpenSSL::BN.generate_prime(10).to_i
+# q = OpenSSL::BN.generate_prime(10,true).to_i
+
+while q == pp
+  q = OpenSSL::BN.generate_prime(10).to_i
+end
+
+n = pp * q
+p pp
+p q
+phi = (pp-1) * (q-1)
+p phi
+
+e = OpenSSL::BN.generate_prime(10).to_i
+
+
+gcdeResult = gcd_etendu(e, phi)
+
+d = gcdeResult[1]
+
+publicKey = [n,e]
+privateKey = d
+
+p publicKey
+p privateKey
+=begin
 ################# Génération des clé#################
 publicKey = nil
 privateKey = nil
@@ -64,13 +108,15 @@ while true
   # d*e = 1 (mod phi)
   # d =(1/e) (mod phi)
 
-  d = 1
+
   #ed mod φ(n) = 1 and cgd(e, φ(n)) = 1
-  while e * d % phi != 1 and e.gcd(phi) != 1
-    d += 1
-    ed = e*d
-    p d
-  end
+
+  d = e.modular_inverse(phi)
+  # while e * d % phi != 1 and e.gcd(phi) != 1
+  #   d += 1
+  #   ed = e*d
+  #   p d
+  # end
 
 
 end
@@ -84,3 +130,4 @@ publicKey = [e, n]
 privateKey = [d, n]
 p "publicKey: " + publicKey.to_s
 p "privateKey: " + privateKey.to_s
+=end
