@@ -25,7 +25,9 @@ pp = 5
 # q = OpenSSL::BN.generate_prime(10).to_i
 q = 17
 
-# phi = pp * q
+# n = pp * q
+n= 85
+# phi = (pp - 1) * (q - 1)
 phi = 64
 
 e = 5

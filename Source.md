@@ -12,3 +12,7 @@ https://www.dcode.fr/chiffre-rsa
 https://fr.wiktionary.org/wiki/%E2%89%A1
 https://fr.wikipedia.org/wiki/Algorithme_d%27Euclide_%C3%A9tendu
 https://stackoverflow.com/questions/16310871/how-to-find-d-given-p-q-and-e-in-rsa
+https://ruby-doc.org/stdlib-2.5.1/libdoc/openssl/rdoc/OpenSSL/BN.html
+https://www.rubyguides.com/2015/05/working-with-files-ruby/
+https://stackoverflow.com/a/64852178
+https://youtu.be/Xlal_d4zyfo
