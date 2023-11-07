@@ -1,3 +1,8 @@
+require 'prime'
+require 'byebug'
+require 'pry'
+require 'openssl'
+
 def extended_gcd(a, b)
 
   # trivial case first: gcd(a, 0) == 1*a + 0*0
