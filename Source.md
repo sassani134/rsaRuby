@@ -16,3 +16,4 @@ https://ruby-doc.org/stdlib-2.5.1/libdoc/openssl/rdoc/OpenSSL/BN.html
 https://www.rubyguides.com/2015/05/working-with-files-ruby/
 https://stackoverflow.com/a/64852178
 https://youtu.be/Xlal_d4zyfo
+https://www.altcademy.com/blog/what-are-files-in-ruby/
