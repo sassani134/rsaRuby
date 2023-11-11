@@ -2,6 +2,9 @@ require 'prime'
 require 'byebug'
 require 'pry'
 require 'openssl'
+require 'base64'
+
+CHEMIN = "./cleRSA/"
 
 def gcd_etendu(a, b)
   # cgd(e, φ(n)) = es + φ(n)t = 1
@@ -18,30 +21,66 @@ def gcd_etendu(a, b)
   return t, s - q * t
 end
 
-pp = OpenSSL::BN.generate_prime(10).to_i
-# pp = OpenSSL::BN.generate_prime(10,true).to_i
-q = OpenSSL::BN.generate_prime(10).to_i
-# q = OpenSSL::BN.generate_prime(10,true).to_i
+def fileExist(file)
+  File.exist?(file)
+end
+
+
+
+pp = OpenSSL::BN.generate_prime(10,true).to_i
+q = OpenSSL::BN.generate_prime(10,true).to_i
 
 while q == pp
   q = OpenSSL::BN.generate_prime(10).to_i
 end
 
 n = pp * q
-p pp
-p q
 phi = (pp-1) * (q-1)
-p phi
 
-e = OpenSSL::BN.generate_prime(10).to_i
+e = OpenSSL::BN.generate_prime(10,true).to_i
 
 
 gcdeResult = gcd_etendu(e, phi)
 
 d = gcdeResult[1]
 
-publicKey = [n,e]
-privateKey = d
+@publicKey = [n.to_s,e.to_s]
+@privateKey = d.to_s
 
-p publicKey
-p privateKey
+
+
+def keyFiles(fileArgs = nil)
+  if fileArgs == nil
+    fileArgs = "monRSA"
+  end
+
+  fileName = CHEMIN+fileArgs
+
+  if fileExist(fileName+".pub") or fileExist(fileName+".priv")
+    File.open(fileName+".pub", "a") do |f|
+      f.puts "---begin monRSA public key---"
+      f.puts Base64.encode64(@publicKey[0] +"\r"+@publicKey[1])
+      f.puts "---end monRSA public key---"
+      f.close
+    end
+    File.open(fileName+".priv", "a") do |f|
+      f.puts "---begin monRSA private key---"
+      f.puts Base64.encode64(@publicKey[0] + "\r" +@privateKey)
+      f.puts "---end monRSA private key---"
+      f.close
+    end
+  else
+    File.open(fileName+".pub", "w") do |f|
+      f.puts "---begin monRSA public key---"
+      f.puts Base64.encode64(@publicKey[0] +"\r"+ @publicKey[1])
+      f.puts "---end monRSA public key---"
+      f.close
+    end
+    File.open(fileName+".priv", "w") do |f|
+      f.puts "---begin monRSA private key---"
+      f.puts Base64.encode64(@publicKey[0] + "\r" + @privateKey)
+      f.puts "---end monRSA private key---"
+      f.close
+    end
+  end
+end
